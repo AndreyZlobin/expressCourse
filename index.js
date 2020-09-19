@@ -25,18 +25,15 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views')
+
 app.use(express.static(path.join(__dirname, "static")));
 
+app.use(express.urlencoded({extended: true}))
 
+app.use('/', index)
+app.use('/add', add)
+app.use('/courses', courses)
 
-app.use(index)
-app.use(add)
-app.use(courses)
-
-app.get('/', (res, req) => {
-  res.render('index')
-
-})
 app.listen(PORT, () => {
   console.log(`server has been started on port ${PORT}`);
 })
